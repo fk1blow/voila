@@ -1,0 +1,70 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>voila dis</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    </head>
+    <body>
+
+        <div id="app"></div>
+
+        <script>
+            (function(f, voila) {
+                if (!voila.__SV) {
+                    var carrierEl, e, methods, i;
+
+                    window.voila = voila;
+                    voila._i = [];
+
+                    voila.init = function(a, e, d) {
+                        function addMethod(target, method) {
+                            var a = method.split(".");
+                            2 == a.length && (voila = target[a[0]], method = a[1]);
+                            target[method] = function() {
+                                target.push([method].concat(Array.prototype.slice.call(arguments, 0)))
+                            }
+                        }
+                        var ref = voila;
+                        "undefined" !== typeof d ? ref = voila[d] = [] : d = "voila";
+                        ref.people = ref.people || [];
+                        ref.toString = function(b) {
+                            var a = "voila";
+                            "voila" !== d && (a += "." + d);
+                            voila || (a += " (stub)");
+                            return a
+                        };
+                        ref.people.toString = function() {
+                            return ref.toString(1) + ".people (stub)"
+                        };
+                        methods = "happened clicked submitted".split(" ");
+                        for (i = 0; i < methods.length; i++) {
+                            addMethod(ref, methods[i]);
+                        }
+                        voila._i.push([a, e, d])
+                    };
+                    voila.__SV = "0.0.1";
+
+                    carrierEl = f.createElement("script");
+                    carrierEl.type = "text/javascript";
+                    carrierEl.async = !0;
+                    carrierEl.src = "http://localhost:9000/voila_client.js";
+                    e = f.getElementsByTagName("script")[0];
+                    e.parentNode.insertBefore(carrierEl, e)
+                }
+            })(document, window.voila || []);
+
+          voila.init("YOUR TOKEN");
+
+          voila.happened('something', {foo: 'lots of foos'})
+          voila.happened('another thing', {foo: 'lots of foos'})
+          voila.clicked('.basic-link', {foo: 'lots of foos'})
+          voila.submitted('.basic-form', {file: '//some/file', type: '.jpg'})
+
+        </script>
+    </body>
+</html>
