@@ -11,8 +11,6 @@ var concat = require('gulp-concat');
 var watchify = require('watchify');
 var browserify = require('browserify');
 var coffee = require('coffee-script');
-var browserSync = require('browser-sync');
-var reload = browserSync.reload;
 
 // Error handler
 var errorHandler = function(err) {
@@ -23,40 +21,34 @@ var errorHandler = function(err) {
 // watchify bundler
 var bundler = watchify(browserify({
   debug: true,
-  entries: ['./app/scripts/main.js'],
+  entries: ['./app/scripts/voila.coffee'],
   extensions: ['.coffee'],
-  cache: {}, fullPaths: true
+  cache: {}, fullPaths: true,
+  standalone: "Voila"
 }));
 bundler.transform('reactify');
 bundler.transform('coffeeify');
 bundler.on('update', bundleScripts);
 
 function bundleScripts() {
+  console.log("bundleScripts")
   return bundler.bundle()
     .on('error', function(err) {
       errorHandler(err);
       this.emit('end');
     })
-    .pipe(source('main.js'))
+    .pipe(source('voila.js'))
     .pipe(gulp.dest('./dist/scripts'))
-    .pipe(reload({stream: true}))
 }
 
 // bundles the scripts bundle out using "browserify"
 gulp.task('bundle-scripts', bundleScripts);
 
-
-// Static server
-gulp.task('browser-sync', function() {
-  var config = {
-    port: 9000,
-    server: {
-        baseDir: ["app", "lib"],
-    },
-    logLevel: "debug",
-    debugInfo: true
-  }
-  browserSync(config);
+// 3rd party libs
+gulp.task('vendor-libs', function() {
+  return gulp.src('vendor/**/*.js')
+    .pipe(concat('libs-bundle.js'))
+    .pipe(gulp.dest('dist/scripts'));
 });
 
 // Scripts
@@ -155,7 +147,6 @@ gulp.task('default', ['clean', 'build', 'jest' ]);
 gulp.task('serve', function () {
     gulp.src('dist')
         .pipe($.webserver({
-            root: ['app'],
             host : '0.0.0.0',
             livereload: true,
             port: 9000
@@ -202,4 +193,4 @@ gulp.task('watch', function () {
 });
 
 // Main development task
-gulp.task('development', ['build', 'watch', 'browser-sync']);
+gulp.task('development', ['build', 'watch', 'serve']);

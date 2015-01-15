@@ -11,60 +11,77 @@
     </head>
     <body>
 
-        <div id="app"></div>
+        <div id="app">
+          <button>a button</button>
+          <button>another button</button>
+          <button style="color:green">green button</button>
+          <button style="color:blue">blue button</button>
+          <button style="color:red">red button</button>
+
+          <div class="main-container">a div container</div>
+        </div>
 
         <script>
-            (function(f, voila) {
-                if (!voila.__SV) {
-                    var carrierEl, e, methods, i;
+          (function(f, voila) {
+            if (!voila.__SV) {
+              var carrierEl, e, methods, i;
 
-                    window.voila = voila;
-                    voila._i = [];
+              window.voila = voila;
+              voila._i = [];
 
-                    voila.init = function(a, e, d) {
-                        function addMethod(target, method) {
-                            var a = method.split(".");
-                            2 == a.length && (voila = target[a[0]], method = a[1]);
-                            target[method] = function() {
-                                target.push([method].concat(Array.prototype.slice.call(arguments, 0)))
-                            }
-                        }
-                        var ref = voila;
-                        "undefined" !== typeof d ? ref = voila[d] = [] : d = "voila";
-                        ref.people = ref.people || [];
-                        ref.toString = function(b) {
-                            var a = "voila";
-                            "voila" !== d && (a += "." + d);
-                            voila || (a += " (stub)");
-                            return a
-                        };
-                        ref.people.toString = function() {
-                            return ref.toString(1) + ".people (stub)"
-                        };
-                        methods = "happened clicked submitted".split(" ");
-                        for (i = 0; i < methods.length; i++) {
-                            addMethod(ref, methods[i]);
-                        }
-                        voila._i.push([a, e, d])
-                    };
-                    voila.__SV = "0.0.1";
-
-                    carrierEl = f.createElement("script");
-                    carrierEl.type = "text/javascript";
-                    carrierEl.async = !0;
-                    carrierEl.src = "http://localhost:9000/voila_client.js";
-                    e = f.getElementsByTagName("script")[0];
-                    e.parentNode.insertBefore(carrierEl, e)
+              voila.init = function(a, e, d) {
+                function addMethod(target, method) {
+                  var a = method.split(".");
+                  2 == a.length && (voila = target[a[0]], method = a[1]);
+                  target[method] = function() {
+                      target.push([method].concat(Array.prototype.slice.call(arguments, 0)))
+                  }
                 }
-            })(document, window.voila || []);
+                var ref = voila;
+                "undefined" !== typeof d ? ref = voila[d] = [] : d = "voila";
+                ref.people = ref.people || [];
+                ref.toString = function(b) {
+                  var a = "voila";
+                  "voila" !== d && (a += "." + d);
+                  voila || (a += " (stub)");
+                  return a
+                };
+                ref.people.toString = function() {
+                  return ref.toString(1) + ".people (stub)"
+                };
+                methods = "happened indentifies infiltrate".split(" ");
+                for (i = 0; i < methods.length; i++) {
+                  addMethod(ref, methods[i]);
+                }
+                voila._i.push([a, e, d])
+              };
+              voila.__SV = "0.0.1";
 
-          voila.init("YOUR TOKEN");
+              carrierEl = f.createElement("script");
+              carrierEl.type = "text/javascript";
+              carrierEl.async = !0;
+              // carrierEl.src = "http://localhost:9000/voila_client.js";
+              e = f.getElementsByTagName("script")[0];
+              e.parentNode.insertBefore(carrierEl, e)
+            }
+          })(document, window.voila || []);
 
-          voila.happened('something', {foo: 'lots of foos'})
-          voila.happened('another thing', {foo: 'lots of foos'})
-          voila.clicked('.basic-link', {foo: 'lots of foos'})
-          voila.submitted('.basic-form', {file: '//some/file', type: '.jpg'})
+          // voila.init("YOUR TOKEN");
 
+          // voila.happened('something', {foo: 'lots of foos'})
+          // voila.happened('another thing', {foo: 'lots of foos'})
+          // voila.clicked('.basic-link', {foo: 'lots of foos'})
+          // voila.submitted('.basic-form', {file: '//some/file', type: '.jpg'})
+
+
+
+        </script>
+
+        <!-- <script src="scripts/libs-bundle.js"></script> -->
+        <script src="scripts/voila.js"></script>
+
+        <script type="text/javascript">
+          Voila.init()
         </script>
     </body>
 </html>
